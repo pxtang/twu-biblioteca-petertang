@@ -17,17 +17,17 @@ import static org.mockito.Mockito.*;
 public class LibraryTest {
     private Library library;
     private  PrintStream printStream;
-    private ArrayList<String> listOfBooks;
+    private ArrayList<Book> listOfBooks;
     @Before
     public void setup(){
         printStream = mock(PrintStream.class);
         library = new Library(printStream);
 
-        listOfBooks = new ArrayList<String>();
-        listOfBooks.add("Catch-22");
-        listOfBooks.add("Harry Potter and the Sorcerer's Stone");
-        listOfBooks.add("The Man from the Underground");
-        listOfBooks.add("Head First Java");
+        listOfBooks = new ArrayList<>();
+        listOfBooks.add(new Book("Catch-22","Joseph Heller", 1961));
+        listOfBooks.add(new Book("Harry Potter and the Sorcerer's Stone", "JK Rowling", 1997));
+        listOfBooks.add(new Book("Notes from the Underground", "Fyodor Dostoevsky", 1864));
+        listOfBooks.add(new Book("Head First Java", "Bert Bates and Kathy Sierra", 2003));
     }
 
     @Test public void testSomeLibraryMethod() {
@@ -58,9 +58,10 @@ public class LibraryTest {
 
         library = new Library(printStream, listOfBooks);
         library.listAllBooks();
-        verify(printStream).println("Catch-22");
-        verify(printStream).println("Harry Potter and the Sorcerer's Stone");
-        verify(printStream).println("The Man from the Underground");
-        verify(printStream).println("Head First Java");
+
+        verify(printStream).println(contains("Catch-22 | Joseph Heller | 1961"));
+        verify(printStream).println(contains("Harry Potter and the Sorcerer's Stone | JK Rowling | 1997"));
+        verify(printStream).println(contains("Notes from the Underground | Fyodor Dostoevsky | 1864"));
+        verify(printStream).println(contains("Head First Java | Bert Bates and Kathy Sierra | 2003"));
     }
 }

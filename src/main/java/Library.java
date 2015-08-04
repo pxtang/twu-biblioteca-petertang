@@ -11,14 +11,13 @@ import java.util.List;
 public class Library {
 
     private PrintStream outstream;
-    private List<String> books;
+    private List<Book> books;
 
     public Library(PrintStream outstream) {
-        this.outstream = outstream;
-        books = new ArrayList<String>();
+        this(outstream, new ArrayList<Book>());
     }
 
-    public Library(PrintStream outstream, ArrayList<String> listOfBooks) {
+    public Library(PrintStream outstream, ArrayList<Book> listOfBooks) {
         this.outstream = outstream;
         this.books = listOfBooks;
 
@@ -37,8 +36,11 @@ public class Library {
     }
 
     public void listAllBooks() {
-        for (String book : books) {
-            outstream.println(book);
+        String output = "";
+        for (Book book : books) {
+            //outstream.println(book);
+            output += book + "\n";
         }
+        outstream.println(output);
     }
 }
