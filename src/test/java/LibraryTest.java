@@ -1,4 +1,6 @@
 import org.junit.Test;
+
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
 /*
@@ -12,4 +14,12 @@ public class LibraryTest {
         Library classUnderTest = new Library();
         assertTrue("someLibraryMethod should return 'true'", classUnderTest.someLibraryMethod());
     }
+
+    @Test
+    public void testGetWelcomeMessage() {
+        Library classUnderTest = new Library();
+        String welcomeMessage = classUnderTest.getWelcomeMessage();
+        assertThat(welcomeMessage, is("Welcome to the Library! Biblioteca is available! :D"));
+    }
+
 }
