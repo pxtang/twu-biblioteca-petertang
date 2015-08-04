@@ -8,11 +8,11 @@ import java.io.PrintStream;
  */
 public class Library {
 
-//    private PrintStream outstream;
-//
-//    public Library(PrintStream outstream) {
-//        this.outstream = outstream;
-//    }
+    private PrintStream outstream;
+
+    public Library(PrintStream outstream) {
+        this.outstream = outstream;
+    }
 
     public boolean someLibraryMethod() {
         return true;
@@ -20,5 +20,9 @@ public class Library {
 
     public String getWelcomeMessage() {
         return "Welcome to the Library! Biblioteca is available! :D";
+    }
+
+    public void printWelcomeMessage(){
+         outstream.println(getWelcomeMessage());
     }
 }
