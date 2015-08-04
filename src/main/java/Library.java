@@ -10,15 +10,13 @@ import java.util.List;
  */
 public class Library {
 
-    private PrintStream outstream;
     private List<Book> books;
 
-    public Library(PrintStream outstream) {
-        this(outstream, new ArrayList<Book>());
+    public Library() {
+        this(new ArrayList<Book>());
     }
 
-    public Library(PrintStream outstream, ArrayList<Book> listOfBooks) {
-        this.outstream = outstream;
+    public Library(ArrayList<Book> listOfBooks) {
         this.books = listOfBooks;
 
     }
@@ -27,20 +25,17 @@ public class Library {
         return true;
     }
 
-    public String getWelcomeMessage() {
-        return "Welcome to the Library! Biblioteca is available! :D";
+    public String open() {
+        return "Welcome to the Library! Biblioteca is available!";
     }
 
-    public void open(){
-         outstream.println(getWelcomeMessage());
-    }
 
-    public void listAllBooks() {
+    public String listAllBooks() {
         String output = "";
         for (Book book : books) {
             //outstream.println(book);
             output += book + "\n";
         }
-        outstream.println(output);
+        return output;
     }
 }

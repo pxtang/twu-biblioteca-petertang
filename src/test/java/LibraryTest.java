@@ -16,12 +16,10 @@ import static org.mockito.Mockito.*;
  */
 public class LibraryTest {
     private Library library;
-    private  PrintStream printStream;
     private ArrayList<Book> listOfBooks;
     @Before
     public void setup(){
-        printStream = mock(PrintStream.class);
-        library = new Library(printStream);
+        library = new Library();
 
         listOfBooks = new ArrayList<>();
         listOfBooks.add(new Book("Catch-22","Joseph Heller", 1961));
@@ -35,33 +33,22 @@ public class LibraryTest {
     }
 
     @Test
-    public void testGetWelcomeMessage() {
-        String welcomeMessage = library.getWelcomeMessage();
-        assertThat(welcomeMessage, is("Welcome to the Library! Biblioteca is available! :D"));
-    }
-
-    @Test
-    public void shouldPrintWelcomeWhenOpen() {
-        library.open();
-        verify(printStream).println("Welcome to the Library! Biblioteca is available! :D");
-
+    public void shouldProduceWelcomeWhenOpen() {
+        assertThat(library.open(), is("Welcome to the Library! Biblioteca is available!"));
     }
 
     @Test
     public void shouldListNothingWhenLibraryCreatedWithNoBooks(){
-        library.listAllBooks();
-        verify(printStream, never()).println();
+        assertThat(library.listAllBooks(), is(""));
     }
 
     @Test
     public void shouldListAllBooksWhenLibraryCreatedWithBooks() { // ??? is this a dumb name
 
-        library = new Library(printStream, listOfBooks);
-        library.listAllBooks();
-
-        verify(printStream).println(contains("Catch-22 | Joseph Heller | 1961"));
-        verify(printStream).println(contains("Harry Potter and the Sorcerer's Stone | JK Rowling | 1997"));
-        verify(printStream).println(contains("Notes from the Underground | Fyodor Dostoevsky | 1864"));
-        verify(printStream).println(contains("Head First Java | Bert Bates and Kathy Sierra | 2003"));
+        library = new Library(listOfBooks);
+        assertThat(library.listAllBooks(), is("Catch-22 | Joseph Heller | 1961\n" +
+                "Harry Potter and the Sorcerer's Stone | JK Rowling | 1997\n" +
+                "Notes from the Underground | Fyodor Dostoevsky | 1864\n" +
+                "Head First Java | Bert Bates and Kathy Sierra | 2003\n"));
     }
 }
