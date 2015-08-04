@@ -2,6 +2,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.PrintStream;
+import java.util.ArrayList;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
@@ -14,28 +15,52 @@ import static org.mockito.Mockito.*;
  * @author ptang, @date 8/4/15 1:34 PM
  */
 public class LibraryTest {
-    private Library classUnderTest;
+    private Library library;
     private  PrintStream printStream;
+    private ArrayList<String> listOfBooks;
     @Before
     public void setup(){
         printStream = mock(PrintStream.class);
-        classUnderTest = new Library(printStream);
+        library = new Library(printStream);
+
+        listOfBooks = new ArrayList<String>();
+        listOfBooks.add("Catch-22");
+        listOfBooks.add("Harry Potter and the Sorcerer's Stone");
+        listOfBooks.add("The Man from the Underground");
+        listOfBooks.add("Head First Java");
     }
 
     @Test public void testSomeLibraryMethod() {
-        assertTrue("someLibraryMethod should return 'true'", classUnderTest.someLibraryMethod());
+        assertTrue("someLibraryMethod should return 'true'", library.someLibraryMethod());
     }
 
     @Test
     public void testGetWelcomeMessage() {
-        String welcomeMessage = classUnderTest.getWelcomeMessage();
+        String welcomeMessage = library.getWelcomeMessage();
         assertThat(welcomeMessage, is("Welcome to the Library! Biblioteca is available! :D"));
     }
 
     @Test
-    public void testPrintWelcomeMessage(){
-        classUnderTest.printWelcomeMessage();
+    public void shouldPrintWelcomeWhenOpen() {
+        library.open();
         verify(printStream).println("Welcome to the Library! Biblioteca is available! :D");
 
+    }
+
+    @Test
+    public void shouldListNothingWhenLibraryCreatedWithNoBooks(){
+        library.listAllBooks();
+        verify(printStream, never()).println();
+    }
+
+    @Test
+    public void shouldListAllBooksWhenLibraryCreatedWithBooks() { // ??? is this a dumb name
+
+        library = new Library(printStream, listOfBooks);
+        library.listAllBooks();
+        verify(printStream).println("Catch-22");
+        verify(printStream).println("Harry Potter and the Sorcerer's Stone");
+        verify(printStream).println("The Man from the Underground");
+        verify(printStream).println("Head First Java");
     }
 }
