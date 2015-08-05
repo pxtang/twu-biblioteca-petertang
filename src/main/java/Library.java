@@ -47,8 +47,11 @@ public class Library {
     }
 
     public String getOption(String option) {
-        Command commandToExecute = commands.get(option);
+        if(commands.containsKey(option)) {
+            Command commandToExecute = commands.get(option);
+            return commandToExecute.execute();
+        }
 
-        return commandToExecute.execute();
+        return "Select a valid option!";
     }
 }

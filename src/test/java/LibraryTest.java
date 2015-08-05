@@ -77,7 +77,13 @@ public class LibraryTest {
 
         library = new Library(listOfBooks);
 
-        assertThat(library.getOption("1"), is("Book A\nBook B\n") );
+        assertThat(library.getOption("1"), is("Book A\nBook B\n"));
+
+    }
+
+    @Test
+    public void shouldProduceErrorMessageWhenInvalidChoiceEntered()  {
+        assertThat(library.getOption("!!!!"), is("Select a valid option!"));
 
     }
 }
