@@ -1,16 +1,23 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class BibliotecaApp {
 
-
-
-    public static void main(String[] args) {
+    public void run() {
         ArrayList<Book> listOfBooks = new ArrayList<>();
         addBooksToList(listOfBooks);
         Library biblioteca = new Library(listOfBooks);
         System.out.println(biblioteca.open());
+        System.out.println(biblioteca.listOptions());
+        Scanner userInput = new Scanner(System.in);
+        System.out.println("Which option would you like to choose?");
+        String userOption = userInput.nextLine();
+        System.out.println(biblioteca.getOption(userOption));
+    }
 
-        System.out.println(biblioteca.listAllBooks());
+    public static void main(String[] args) {
+        BibliotecaApp app = new BibliotecaApp();
+        app.run();
     }
 
     public static void addBooksToList(ArrayList<Book> listOfBooks) {

@@ -51,4 +51,33 @@ public class LibraryTest {
                 "Harry Potter and the Sorcerer's Stone | JK Rowling | 1997\n" +
                 "Notes from the Underground | Fyodor Dostoevsky | 1864\n"));
     }
+
+    @Test
+    public void shouldListAllOptionsWhenListingOptions() {
+        assertThat(library.listOptions(), is("(1) List Books"));
+    }
+
+
+    @Test
+    public void shouldSelectCorrectOptionWhenUserChooses() {
+
+
+    }
+
+    @Test
+    public void shouldListBooksWhenListBooksChoiceReceived() {
+        listOfBooks = new ArrayList<>();
+        Book book1 = mock(Book.class);
+        Book book2 = mock(Book.class);
+        listOfBooks.add(book1);
+        listOfBooks.add(book2);
+
+        when(book1.toString()).thenReturn("Book A");
+        when(book2.toString()).thenReturn("Book B");
+
+        library = new Library(listOfBooks);
+
+        assertThat(library.getOption("1"), is("Book A\nBook B\n") );
+
+    }
 }
