@@ -20,12 +20,6 @@ public class LibraryTest {
     @Before
     public void setup(){
         library = new Library();
-
-        listOfBooks = new ArrayList<>();
-        listOfBooks.add(new Book("Catch-22","Joseph Heller", 1961));
-        listOfBooks.add(new Book("Harry Potter and the Sorcerer's Stone", "JK Rowling", 1997));
-        listOfBooks.add(new Book("Notes from the Underground", "Fyodor Dostoevsky", 1864));
-        listOfBooks.add(new Book("Head First Java", "Bert Bates and Kathy Sierra", 2003));
     }
 
     @Test
@@ -40,11 +34,21 @@ public class LibraryTest {
 
     @Test
     public void shouldListAllBooksWhenLibraryCreatedWithBooks() {
+        listOfBooks = new ArrayList<>();
+        Book book1 = mock(Book.class);
+        Book book2 = mock(Book.class);
+        Book book3 = mock(Book.class);
+        listOfBooks.add(book1);
+        listOfBooks.add(book2);
+        listOfBooks.add(book3);
+
+        when(book1.toString()).thenReturn("Catch-22 | Joseph Heller | 1961");
+        when(book2.toString()).thenReturn("Harry Potter and the Sorcerer's Stone | JK Rowling | 1997");
+        when(book3.toString()).thenReturn("Notes from the Underground | Fyodor Dostoevsky | 1864");
 
         library = new Library(listOfBooks);
         assertThat(library.listAllBooks(), is("Catch-22 | Joseph Heller | 1961\n" +
                 "Harry Potter and the Sorcerer's Stone | JK Rowling | 1997\n" +
-                "Notes from the Underground | Fyodor Dostoevsky | 1864\n" +
-                "Head First Java | Bert Bates and Kathy Sierra | 2003\n"));
+                "Notes from the Underground | Fyodor Dostoevsky | 1864\n"));
     }
 }
