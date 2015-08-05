@@ -13,18 +13,6 @@ public class Book {
         this.year = year;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public Integer getYear() {
-        return year;
-    }
-
     public String toString() {
         return String.format("%s | %s | %d", title, author, year);
     }

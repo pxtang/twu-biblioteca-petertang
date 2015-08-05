@@ -21,10 +21,6 @@ public class Library {
 
     }
 
-    public boolean someLibraryMethod() {
-        return true;
-    }
-
     public String open() {
         return "Welcome to the Library! Biblioteca is available!";
     }
@@ -33,7 +29,6 @@ public class Library {
     public String listAllBooks() {
         String output = "";
         for (Book book : books) {
-            //outstream.println(book);
             output += book + "\n";
         }
         return output;

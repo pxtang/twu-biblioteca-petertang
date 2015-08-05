@@ -29,25 +29,6 @@ public class BookTest {
     }
 
     @Test
-    public void shouldShowTitleWhenGetTitle(){
-        assertThat(book.getTitle(), is("Harry Potter and the Sorcerer's Stone"));
-
-    }
-
-
-    @Test
-    public void shouldShowAuthorWhenGetAuthor(){
-        assertThat(book.getAuthor(), is("JK Rowling"));
-
-    }
-
-    @Test
-    public void shouldShowYearWhenGetYear(){
-        assertThat(book.getYear(), is(1997));
-
-    }
-
-    @Test
     public void shouldGiveBookInfoInColumnsWhenConvertedToString() {
         String bookString = book.toString();
         assertThat(bookString, is("Harry Potter and the Sorcerer's Stone | JK Rowling | 1997"));

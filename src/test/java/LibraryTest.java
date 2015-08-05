@@ -28,10 +28,6 @@ public class LibraryTest {
         listOfBooks.add(new Book("Head First Java", "Bert Bates and Kathy Sierra", 2003));
     }
 
-    @Test public void testSomeLibraryMethod() {
-        assertTrue("someLibraryMethod should return 'true'", library.someLibraryMethod());
-    }
-
     @Test
     public void shouldProduceWelcomeWhenOpen() {
         assertThat(library.open(), is("Welcome to the Library! Biblioteca is available!"));
@@ -43,7 +39,7 @@ public class LibraryTest {
     }
 
     @Test
-    public void shouldListAllBooksWhenLibraryCreatedWithBooks() { // ??? is this a dumb name
+    public void shouldListAllBooksWhenLibraryCreatedWithBooks() {
 
         library = new Library(listOfBooks);
         assertThat(library.listAllBooks(), is("Catch-22 | Joseph Heller | 1961\n" +
